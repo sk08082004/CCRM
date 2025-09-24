@@ -4,36 +4,43 @@ import edu.ccrm.domain.Enrollment;
 import edu.ccrm.domain.Course;
 import java.util.*;
 
+// service class to manage enrollments
 public class EnrollmentService {
+    // map of student reg no. to their enrollments
     private final Map<String, List<Enrollment>> byStudent = new HashMap<>();
 
-    public Enrollment enroll(String regNo, String courseCode){
-        Enrollment e = new Enrollment(regNo, courseCode);
-        byStudent.computeIfAbsent(regNo, k -> new ArrayList<>()).add(e);
+    // enrolls a student in a course
+    // creates and returns the enrollment record
+    public Enrollment enrolStud(String regNo, String courseCod){
+        Enrollment e = new Enrollment(regNo, courseCod);
+        byStudent.computeIfAbsent(regNo, k -> new ArrayList<Enrollment>()).add(e);
         return e;
     }
 
+    // returns all enrollments of a student by reg no.
     public List<Enrollment> listEnrollments(String regNo){
-        return byStudent.getOrDefault(regNo, Collections.emptyList());
+         return byStudent.getOrDefault(regNo, Collections.emptyList());
     }
 
-    public void recordMarks(String regNo, String courseCode, int marks){
+    // records marks
+    public void markRec(String regNo, String courseCod, int marks){
         List<Enrollment> lst = byStudent.getOrDefault(regNo, Collections.emptyList());
         for (Enrollment e : lst){
-            if (e.getCourseCode().equalsIgnoreCase(courseCode)){
+            if (e.getCourseCod().equalsIgnoreCase(courseCod)){
                 e.setMarks(marks);
                 return;
             }
         }
-        throw new NoSuchElementException("Enrollment not found for " + regNo + " -> " + courseCode);
+        throw new NoSuchElementException("Enrollment not found for " + regNo + " -> " + courseCod);
     }
 
     public double computeGPA(String regNo, CourseService courseService){
         List<Enrollment> lst = listEnrollments(regNo);
-        int totalCredits = 0;
-        int totalPoints = 0;
+        int totalCredits = 0;   
+        int totalPoints = 0;    
+
         for (Enrollment e : lst){
-            Optional<Course> oc = courseService.getCourse(e.getCourseCode());
+            Optional<Course> oc = courseService.getCourse(e.getCourseCod());
             if (oc.isPresent()){
                 int credits = oc.get().getCredits();
                 totalCredits += credits;

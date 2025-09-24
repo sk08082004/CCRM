@@ -107,3 +107,79 @@ Follow these steps to create and run a Java project in Eclipse:
 ![Step 2 – Create Class](images/eclipse-create-class.png)  
 
 ![Step 3 – Run Configuration](images/eclipse-run-config.png)  
+
+
+## Interface vs Class Inheritance
+
+When designing our codebase, we need to decide carefully between using **interfaces** and **class inheritance**.  
+
+###  When to Use Interfaces
+- **Multiple behaviors**: A class can implement multiple interfaces, which is useful when we want to add capabilities without forcing a rigid hierarchy.  
+- **Contract-based design**: Interfaces define *what* methods a class must implement, without enforcing *how*.  
+- **Looser coupling**: Helps achieve better flexibility and testability (e.g., mocking in unit tests).  
+
+Example: A `Serializable` or `Loggable` interface that many unrelated classes can implement.  
+
+---
+
+###  When to Use Class Inheritance
+- **Shared implementation**: Use class inheritance when subclasses can reuse common fields or methods from a parent class.  
+- **"Is-a" relationship**: Inheritance makes sense if the child is a specialized form of the parent.  
+- **Avoids code duplication**: Base class contains shared logic, reducing repetition.  
+
+ Example: `Car` extends `Vehicle`, since all cars inherit core vehicle properties like speed, fuel capacity, etc.  
+
+---
+
+###  Rule of Thumb
+- Use **interfaces** for *capabilities* (what something can do).  
+- Use **inheritance** for *specializations* (what something is).  
+
+## Errors vs Exceptions (Comparison)
+
+| Aspect              | Errors                                 | Exceptions                               |
+|---------------------|------------------------------------------|--------------------------------------------|
+| **Definition**      | Serious issues at JVM/system level       | Issues at application level                |
+| **Recoverability**  | Usually **not recoverable**              | Often **recoverable** with proper handling |
+| **Cause**           | Resource exhaustion, JVM failure         | Invalid input, logic errors, I/O problems  |
+| **Examples**        | `OutOfMemoryError`, `StackOverflowError` | `IOException`, `NullPointerException`      |
+| **Handling**        | Typically **not caught**                 | Can be caught using `try-catch`            |
+| **Categories**      | No checked/unchecked distinction         | Checked (`IOException`) & Unchecked (`RuntimeException`) |
+| **Best Practice**   | Don’t catch (let JVM handle)             | Catch/handle gracefully in code            |
+
+
+## 📑 Mapping: Syllabus Topic → Code Reference
+
+| Topic                  | Where Demonstrated |
+|-------------------------|--------------------|
+| Encapsulation           | `domain.Student` → private fields + getters/setters |
+| Inheritance             | `domain.Person (abstract)` → extended by `Student`, `Instructor` |
+| Abstraction             | `domain.Person` (abstract methods) |
+| Polymorphism            | `service.TranscriptService` (interface + impls) |
+| Immutability            | `domain.CourseCode` (final fields) |
+| Interfaces              | `service.Persistable`, `Searchable<T>` |
+| Lambdas & Streams       | `util.Comparators`, `service.CourseService` (filter/search) |
+| Enums                   | `domain.Semester`, `domain.Grade` |
+| Singleton Pattern       | `config.AppConfig` |
+| Builder Pattern         | `domain.Course.Builder`, `Transcript.Builder` |
+| Exceptions              | `exceptions.DuplicateEnrollmentException`, `MaxCreditLimitExceededException` |
+| Assertions              | `domain.Student` (non-null id), `domain.BankAccount` (credit bounds) |
+| File I/O (NIO.2)        | `io.ImportExportService`, `io.BackupService` |
+| Recursive Utility       | `util.RecursiveUtils` (backup size) |
+| Date/Time API           | `domain.Student` (enrollment date), `io.BackupService` (timestamped backup) |
+| CLI Menu & Loops        | `cli.Menu` (switch, while/for/do-while, break/continue) |
+
+
+## Using Assertions for Invariants
+
+We use **assertions** to enforce invariants in the code — conditions that should always hold true if the program is correct.  
+Assertions help catch bugs during development and testing.
+
+### ✅ Examples of Invariants
+- **Non-null IDs**  
+  ```java
+  assert id != null : "ID must not be null";
+ 
+  assert credit >= 0 && credit <= MAX_CREDIT : "Credit out of bounds";
+
+  assert currentState != null : "State cannot be null";
