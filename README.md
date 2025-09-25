@@ -102,7 +102,7 @@ Follow these steps to create and run a Java project in Eclipse:
 
 ### Screenshots  
 
-![Step 1 – Eclipse New Project](Step-2_page004.jpg)  
+![Step 1 – Eclipse New Project](screenshots/Step-2_page004.jpg)  
 
 ![Step 2 – Create Class](screenshots/Step-2_page-0005.jpg)  
 
