@@ -68,11 +68,11 @@ Follow these steps to install Java on Windows:
 
 ### Screenshots  
 
-![Step 1 – Download JDK](images/Step-1_page-0001.jpg)  
+![Step 1 – Download JDK](screenshots/Step-1_page-0001.jpg)  
 
-![Step 2 – Install Wizard](images/Step-1_page-0002.jpg)  
+![Step 2 – Install Wizard](screenshots/Step-1_page-0002.jpg)  
 
-![Step 3 – Verify in Command Prompt](images/Step-1_page-0003.jpg)  
+![Step 3 – Verify in Command Prompt](screenshots/Step-1_page-0003.jpg)  
 
 ---
 
