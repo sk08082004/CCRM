@@ -102,11 +102,11 @@ Follow these steps to create and run a Java project in Eclipse:
 
 ### Screenshots  
 
-![Step 1 – Eclipse New Project](screenshots/Step 1_page-0001.jpg)  
+![Step 1 – Eclipse New Project](Step-2_page004.jpg)  
 
-![Step 2 – Create Class](screenshots/Step 1_page-0003.jpg)  
+![Step 2 – Create Class](screenshots/Step-2_page-0005.jpg)  
 
-![Step 3 – Run Configuration](screenshots/Step 1_page-0005.jpg)  
+![Step 3 – Run Configuration](screenshots/Step-2_page-0006.jpg)  
 
 
 ## Interface vs Class Inheritance
